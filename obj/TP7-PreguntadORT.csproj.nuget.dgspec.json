@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj": {}
+    "C:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj": {}
   },
   "projects": {
-    "c:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj": {
+    "C:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj",
+        "projectUniqueName": "C:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj",
         "projectName": "TP7-PreguntadORT",
-        "projectPath": "c:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj",
+        "projectPath": "C:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj",
         "packagesPath": "C:\\Users\\lyuke\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\obj\\",
+        "outputPath": "C:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lyuke\\AppData\\Roaming\\NuGet\\NuGet.Config"
