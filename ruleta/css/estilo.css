@@ -1,0 +1,28 @@
+* {
+  margin: 0px;
+  text-align: center;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #333;
+}
+
+#ruleta{
+  transform: rotate(-720deg);
+  transition: all 1.5s;
+}
+
+#boton {
+  position: absolute;
+  z-index: 1000000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+}
