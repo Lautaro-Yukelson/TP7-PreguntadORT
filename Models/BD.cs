@@ -40,19 +40,21 @@ public static class BD
         }
     }
 
-    public static List<Respuesta> ObtenerRespuestas(List<Pregunta> Preguntas)
+    public static List<Respuesta> ObtenerRespuestas(Pregunta Preguntas)
     {
-        List<Respuesta> _ListaRespuestas = new List<Respuesta>();
         string sql = "exec sp_ObtenerRespuestas @idPregunta;";
-        foreach (Pregunta pregunta in Preguntas)
+        using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            using (SqlConnection db = new SqlConnection(_connectionString))
-            {
-                List<Respuesta> respuestas = db.Query<Respuesta>(sql, new { idPregunta = pregunta.idPregunta }).ToList();
-                _ListaRespuestas.AddRange(respuestas);
-            }
+            return db.Query<Respuesta>(sql, new { idPregunta = pregunta.idPregunta }).ToList();
         }
-        return _ListaRespuestas;
+    }
+
+    public static Respuesta ObtenerRespuesta(int idRespuesta){
+        string sql = "SELECT * FROM Respuestas WHERE idRespuesta = @idrespuesta";
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            return db.Query<Respuesta>(sql, new { idrespuesta = idRespuesta }).SingleOrDefault();
+        }
     }
 
     public static List<Puntaje> ObtenerPuntajes()

@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.ComTypes;
 public static class Juego
 {
     private static string _username { get; set; }
+    private static int _dificultad {get; set;}
     private static int _puntajeActual { get; set; }
     private static int _cantidadPreguntasCorrectas { get; set; }
     private static int _puntosDefault { get; set; } = 10;
@@ -17,9 +18,10 @@ public static class Juego
     private static List<Dificultad> _dificultades = new List<Dificultad>();
     private static Random _random = new Random();
 
-    public static void InicializarJuego()
+    public static void InicializarJuego(string username, int dificultad)
     {
         _username = "";
+        _dificultad = 0;
         _puntajeActual = 0;
         _cantidadPreguntasCorrectas = 0;
     }
@@ -38,6 +40,8 @@ public static class Juego
 
     public static void CargarPartida(string username, int dificultad, int categoria)
     {
+        _username = username;
+        _dificultad = dificultad;
         _preguntas = BD.ObtenerPreguntas(dificultad, categoria);
         _respuestas = BD.ObtenerRespuestas(_preguntas);
     }
@@ -46,6 +50,10 @@ public static class Juego
     {
         if (_preguntas.Count == 0) { return null; }
         return _preguntas[_random.Next(0, _preguntas.Count)];
+    }
+
+    public static List<Respuesta> ObtenerProximasRespuestas(Pregunta pregunta){
+        BD.ObtenerRespuestas(pregunta);        
     }
 
     public static bool VerificarRespuesta(int idPregunta, int idRespuesta)
