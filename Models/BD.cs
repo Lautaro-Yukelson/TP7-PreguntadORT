@@ -33,7 +33,7 @@ public static class BD
 
     public static List<Pregunta> ObtenerPreguntas(int idDificultad, int idCategoria)
     {
-        string sql = "SELECT * FROM Preguntas WHERE idDificultad = @iddificultad and idCategoria = @idcategoria;";
+        string sql = "exec sp_ObtenerPreguntas @iddificultad, @idcategoria;";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             return db.Query<Pregunta>(sql, new { iddificultad = idDificultad, idcategoria = idCategoria }).ToList();
@@ -43,7 +43,7 @@ public static class BD
     public static List<Respuesta> ObtenerRespuestas(List<Pregunta> Preguntas)
     {
         List<Respuesta> _ListaRespuestas = new List<Respuesta>();
-        string sql = "SELECT * FROM Respuestas WHERE idPregunta = @idPregunta;";
+        string sql = "exec sp_ObtenerRespuestas @idPregunta;";
         foreach (Pregunta pregunta in Preguntas)
         {
             using (SqlConnection db = new SqlConnection(_connectionString))
@@ -66,7 +66,7 @@ public static class BD
 
     public static void AgregarPregunta(Pregunta pregunta)
     {
-        string sql = "INSERT INTO Preguntas(idCategoria, idDificultad, Enunciado, Foto) VALUES (@idcategoria, @iddificultad, @enunciado, @foto);";
+        string sql = "exec sp_AgregarPregunta @idcategoria, @iddificultad, @enunciado, @foto;";
         using (SqlConnectiond db = new SqlConnectiond(_connectionString))
         {
             db.Execute(sql, new { idcategoria = pregunta.idCategoria, iddificultad = pregunta.iddificultad, enunciado = pregunta.enunciado, foto = pregunta.foto });
@@ -75,7 +75,7 @@ public static class BD
 
     public static void AgregarPuntaje(Puntaje puntaje)
     {
-        string sql = "INSERT INTO Puntajes(Nombre, Puntos, FechaHora) VALUES (@nombre, @puntos, @fechahora);";
+        string sql = "exec sp_AgregarPuntaje @nombre, @puntos, @fechahora";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             db.Execute(sql, new { nombre = puntaje.nombre, puntos = puntaje.puntos, fechahora = puntaje.fechahora });
