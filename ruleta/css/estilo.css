@@ -1,6 +1,5 @@
 * {
   margin: 0px;
-  text-align: center;
   overflow: hidden;
 }
 
@@ -16,11 +15,12 @@ body {
 .tablero {
   width: 600px;
   height: 600px;
+  text-align: center;
 }
 
 #ruleta {
-  transform: rotate(-720deg);
-  transition: all 1.5s;
+  transform: rotate(-1400deg);
+  transition: all 2s;
   max-width: 530px;
   width: 100%;
 }
@@ -39,7 +39,8 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   background: #e7e6e6;
 }
 
@@ -47,17 +48,72 @@ body {
   width: 100%;
   display: flex;
   padding: 0 20px;
-  justify-content: center;
+  justify-content: left;
 }
 
-/*.jugador-2 {
-  background-color: #a6a4a4;
-}*/
+.jugador-2 {
+  text-align: right;
+  justify-content: right;
+}
 
 .versus {
-  width: 40px;
+  width: 94px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: rgb(67, 209, 141);
   border-radius: 50%;
   padding: 20px;
   border: solid 5px white;
+  color: #e7e6e6;
+  font-size: 28px;
+  font-weight: 800;
 }
+
+.img-player{
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.nombre-jugador{
+  font-size: 20px;
+  font-weight: 800;
+  color: rgb(67, 209, 141);
+  margin-bottom: 5px;
+}
+
+.b-n{
+  filter: grayscale();
+}
+
+/**********************************************************PREGUNTAS**********************************************************/
+
+.cabecera-preguntas{
+  background-color: #ff9520;
+  width: 100%;
+  padding: 20px 20px 0px 20px;
+}
+
+.barra-carga{
+  background-color: rgba(0, 0, 0, 0.253);
+  height: 10px;
+  animation: crecer 30s cubic-bezier(0, 0, 1, 1) forwards;
+}
+
+.info-head{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+@keyframes crecer{
+  0%{
+    width: 0%;
+  }
+  100%{
+    width: 100%;
+  }
+}
+
+
+

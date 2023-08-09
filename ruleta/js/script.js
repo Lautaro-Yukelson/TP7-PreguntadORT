@@ -34,11 +34,11 @@ function girar() {
 				case valor > m * 11 && valor <= m * 13:
 					alert("Ciencias");
 					break;
-				case valor > m * 13 && valor <= 0:
+				default:
 					alert("Historia");
 					break;
 			}
-		}, 2000);
+		}, 2500);
 	}
 }
 
