@@ -7,15 +7,22 @@
 body {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   min-height: 100vh;
-  background: #333;
+  background: url("../image/peakpx.jpg");
 }
 
-#ruleta{
+.tablero {
+  width: 600px;
+  height: 600px;
+}
+
+#ruleta {
   transform: rotate(-720deg);
   transition: all 1.5s;
+  max-width: 530px;
+  width: 100%;
 }
 
 #boton {
@@ -24,5 +31,33 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 700px;
+  width: 100%;
+  max-width: 650px;
+}
+
+.puntajes {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: #e7e6e6;
+}
+
+.jugador {
+  width: 100%;
+  display: flex;
+  padding: 0 20px;
+  justify-content: center;
+}
+
+/*.jugador-2 {
+  background-color: #a6a4a4;
+}*/
+
+.versus {
+  width: 40px;
+  background: rgb(67, 209, 141);
+  border-radius: 50%;
+  padding: 20px;
+  border: solid 5px white;
 }
