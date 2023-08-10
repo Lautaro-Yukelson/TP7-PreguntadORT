@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 
 public static class BD
 {
-    private static string _connectionString = "@Server=localhost;DataBase=PreguntadORT;Trusted_Connection=True;";
+    private static string _connectionString = "Server=localhost;DataBase=PreguntadORT;Trusted_Connection=True;";
 
     public static List<Categoria> ObtenerCategorias()
     {
@@ -32,12 +32,12 @@ public static class BD
         }
     }
 
-    public static List<Pregunta> ObtenerPreguntas(int idDificultad, int idCategoria)
+    public static List<Pregunta> ObtenerPreguntas(int idDificultad)
     {
         string sql = "exec sp_ObtenerPreguntas @iddificultad, @idcategoria;";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            return db.Query<Pregunta>(sql, new { iddificultad = idDificultad, idcategoria = idCategoria }).ToList();
+            return db.Query<Pregunta>(sql, new { iddificultad = idDificultad }).ToList();
         }
     }
 

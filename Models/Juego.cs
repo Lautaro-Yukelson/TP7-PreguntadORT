@@ -38,18 +38,24 @@ public static class Juego
         return _dificultades;
     }
 
-    public static void CargarPartida(string username, int dificultad, int categoria)
+    public static void CargarPartida(string username, int dificultad)
     {
         _username = username;
         _dificultad = dificultad;
-        _preguntas = BD.ObtenerPreguntas(dificultad, categoria);
+        _preguntas = BD.ObtenerPreguntas(dificultad);
         _respuestas = BD.ObtenerRespuestas(_preguntas);
     }
 
-    public static Pregunta ObtenerProximaPregunta()
+    public static Pregunta ObtenerProximaPregunta(int idCategoria)
     {
         if (_preguntas.Count == 0) { return null; }
-        return _preguntas[_random.Next(0, _preguntas.Count)];
+        List<Pregunta> _preguntasPosibles = new List<Pregunta>();
+        foreach (Pregunta pregunta in _preguntas){
+            if(pregunta.idCategoria == idCategoria){
+                _preguntasPosibles.Add(pregunta);
+            }
+        }
+        return _preguntasPosibles[_random.Next(0, _preguntasPosibles.Count)];
     }
 
     public static List<Respuesta> ObtenerProximasRespuestas(Pregunta pregunta){

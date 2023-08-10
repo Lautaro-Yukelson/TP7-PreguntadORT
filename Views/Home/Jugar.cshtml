@@ -1,0 +1,102 @@
+@{
+    ViewData["Title"] = "Jugar";
+}
+
+<div class="pagina-ruleta">
+  <div class="puntajes">
+    <div class="jugador jugador-1">
+      <img src="~/images/jugador.png" alt="icono jugador" width="80" class="img-player"/>
+      <div>   
+        <p class="nombre-jugador">Gonzalo Gonzalez</p>
+        <div class="personajes">
+          <img src="~/images/personajes/Entretenimiento.png" alt="" width="40">
+          <img src="~/images/personajes/Arte.png" alt="" width="40" class="b-n">
+          <img src="~/images/personajes/Deporte.png" alt="" width="40">
+          <img src="~/images/personajes/Historia.png" alt="" width="40" class="b-n">
+          <img src="~/images/personajes/Ciencia.png" alt="" width="40" class="b-n">
+          <img src="~/images/personajes/Geografia.png" alt="" width="40">
+        </div>
+      </div>
+    </div>
+    <div class="versus"><p>vs</p></div>
+    <div class="jugador jugador-2">
+      <div>
+        <p class="nombre-jugador">Fernando Fernandez</p>
+        <div class="personajes">
+          <img src="~/images/personajes/Geografia.png" alt="" width="40">
+          <img src="~/images/personajes/Ciencia.png" alt="" width="40" class="b-n">
+          <img src="~/images/personajes/Historia.png" alt="" width="40">
+          <img src="~/images/personajes/Deporte.png" alt="" width="40" class="b-n">
+          <img src="~/images/personajes/Arte.png" alt="" width="40">
+          <img src="~/images/personajes/Entretenimiento.png" alt="" width="40">
+        </div>
+      </div>
+      <img src="~/images/jugador.png" alt="icono jugador" width="80" class="img-player"/>
+    </div>
+  </div>
+  <div class="tablero-padre">
+    <div class="tablero">
+      <img src="~/images/imagen-ruleta.png" id="ruleta" />
+      <img src="~/images/boton-ruleta.png" id="boton" />
+    </div>
+  </div>
+      <form method="post" action="Pregunta">
+        <input type="number" name="idCategoria" id="idCategoria" class="form-control">
+      </form>
+</div>
+
+<script>
+
+function getRandomInt(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min) + min);
+}
+
+function girar() {
+	let valor = getRandomInt(0, 360);
+	calcular(valor);
+
+	function calcular(valor) {
+		var m = 360 / 7 / 2;
+		ruleta.style.transform = "rotate(" + (0 - valor) + "deg)";
+		setTimeout(() => {
+			switch (true) {
+				case valor > 0 && valor <= m:
+					alert("Historia");
+					break;
+				case valor > m && valor <= m * 3:
+					alert("Deportes");
+					break;
+				case valor > m * 3 && valor <= m * 5:
+					alert("Arte");
+					break;
+				case valor > m * 5 && valor <= m * 7:
+					alert("Entretenimiento");
+					break;
+				case valor > m * 7 && valor <= m * 9:
+					alert("Corona");
+					break;
+				case valor > m * 9 && valor <= m * 11:
+					alert("Geografia");
+					break;
+				case valor > m * 11 && valor <= m * 13:
+					alert("Ciencias");
+					break;
+				default:
+					alert("Historia");
+					break;
+			}
+      alert("@ViewBag.Categorias[0].Nombre"); // FALTA
+		}, 2500);
+	}
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const ruleta = document.querySelector("#ruleta");
+    const boton = document.querySelector("#boton");
+	const input = document.querySelector("idCategoria");
+    boton.addEventListener("click", girar);
+})
+
+</script>
