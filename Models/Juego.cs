@@ -8,7 +8,7 @@ public static class Juego
 {
     private static string _username { get; set; }
     private static int _dificultad {get; set;}
-    private static int _puntajeActual { get; set; }
+    private static double _puntajeActual { get; set; }
     private static int _cantidadPreguntasCorrectas { get; set; }
     private static int _puntosDefault { get; set; } = 10;
 
@@ -18,10 +18,10 @@ public static class Juego
     private static List<Dificultad> _dificultades = new List<Dificultad>();
     private static Random _random = new Random();
 
-    public static void InicializarJuego(string username, int dificultad)
+    public static void InicializarJuego()
     {
         _username = "";
-        _dificultad = 0;
+        _dificultad = 1;
         _puntajeActual = 0;
         _cantidadPreguntasCorrectas = 0;
     }
@@ -53,7 +53,9 @@ public static class Juego
     }
 
     public static List<Respuesta> ObtenerProximasRespuestas(Pregunta pregunta){
-        BD.ObtenerRespuestas(pregunta);        
+        List<Pregunta> __preguntas = new List<Pregunta>();
+        __preguntas.Add(pregunta);
+        return BD.ObtenerRespuestas(__preguntas);   
     }
 
     public static bool VerificarRespuesta(int idPregunta, int idRespuesta)
@@ -64,7 +66,7 @@ public static class Juego
 
         foreach (Pregunta pregunta in _preguntas) { if (pregunta.idPregunta == idPregunta) { pregunta_encontrada = pregunta; } }
         foreach (Respuesta respuesta in _respuestas) { if (respuesta.idRespuesta == idRespuesta) { respuesta_encontrada = respuesta; } }
-        foreach (Dificultad dificultad in _dificultades) { if (dificultad.id == pregunta_encontrada.Dificultad) { dificultad_encontrada = dificultad; } }
+        foreach (Dificultad dificultad in _dificultades) { if (dificultad.idDificultad == pregunta_encontrada.idDificultad) { dificultad_encontrada = dificultad; } }
 
         _preguntas.Remove(pregunta_encontrada);
 

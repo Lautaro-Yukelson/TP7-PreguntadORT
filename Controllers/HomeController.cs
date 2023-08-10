@@ -1,5 +1,4 @@
 ﻿using System.IO.Compression;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Reflection.PortableExecutable;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
@@ -35,10 +34,11 @@ public class HomeController : Controller
         return RedirectToAction("Juego", "Home");
     }
 
-    public IActionResult Juego(){
+    public IActionResult Jugar(){
         ViewBag.Pregunta = Juego.ObtenerProximaPregunta();
-        if (ViewBag.pregunta != null){
+        if (ViewBag.Pregunta != null){
             ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(ViewBag.Pregunta);
+            return View();
         } else {
             return RedirectToAction("Fin", "Home");
         }

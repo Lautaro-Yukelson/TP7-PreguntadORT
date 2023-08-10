@@ -1,10 +1,10 @@
 public class Pregunta
 {
-    int idPregunta { get; set; }
-    int idCategoria { get; set; }
-    int idDificultad { get; set; }
-    string Enunciado { get; set; }
-    string Foto { get; set; }
+    public int idPregunta { get; set; }
+    public int idCategoria { get; set; }
+    public int idDificultad { get; set; }
+    public string Enunciado { get; set; }
+    public string Foto { get; set; }
 
     public Pregunta() { }
 
