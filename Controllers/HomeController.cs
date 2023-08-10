@@ -32,10 +32,10 @@ public class HomeController : Controller
     {
         Juego.InicializarJuego();
         Juego.CargarPartida(username, dificultad);
-        return RedirectToAction("Jugar", "Home");
+        return RedirectToAction("Ruleta", "Home");
     }
 
-    public IActionResult Jugar()
+    public IActionResult Ruleta()
     {
         ViewBag.Categorias = Juego.ObtenerCategorias();
         ViewBag.Usuario = Juego.ObtenerUsuario();
@@ -61,7 +61,7 @@ public class HomeController : Controller
     public IActionResult VerificarRespuesta(int idPregunta, int idRespuesta)
     {
         bool correcto = Juego.VerificarRespuesta(idPregunta, idRespuesta);
-        return RedirectToAction("Jugar", "Home");
+        return RedirectToAction("Ruleta", "Home");
     }
 
     public IActionResult Fin()

@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Pregunta";
+}
+
+<div class="pagina-pregunta">
+    <header class="cabecera-preguntas">
+        <div class="info-head">
+            <img src="" alt="">
+            <p>Deportes</p>
+            <p id="contador">30''</p>
+        </div>
+        <div class="barra-carga barra-crece"></div>
+    </header>
+
+    <main class="juego">
+        <div class="cuadro-pregunta">
+            <p>@ViewBag.Pregunta.Enunciado</p>
+            <img src="" alt="">
+        </div>
+        <div class="opciones">
+            @{
+                foreach(Respuesta respuesta in @ViewBag.Respuestas){
+                    <div class="opcion">
+                        <p>@respuesta.Contenido</p>
+                    </div>
+                }
+            }
+        </div>
+    </main>
+    <footer class="ayudas">
+        <div class="bomba borde-der"><img src="~/images/pregunta/bomba.png" alt="bomba"></div>
+        <div class="doble borde-der"><img src="~/images/pregunta/doble.png" alt="doble"></div>
+        <div class="tick borde"><img src="~/images/pregunta/tick.png" alt="tick"></div>
+    </footer>
+</div>
+
+
+<script>
+    function contador(objeto, tiempo, intervalo){
+    window.setInterval(function(){
+        if(tiempo >= 0){
+            objeto.textContent = tiempo + "''";
+            tiempo--;
+        }
+    }, intervalo * 1000);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        let objeto = document.getElementById("contador")
+        contador(objeto, 29, 1);
+    })
+</script>

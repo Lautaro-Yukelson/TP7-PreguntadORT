@@ -1,11 +1,11 @@
 @{
-    ViewData["Title"] = "Jugar";
+    ViewData["Title"] = "Ruleta";
 }
 
 <div class="pagina-ruleta">
   <div class="puntajes">
     <div class="jugador jugador-1">
-      <img src="~/images/jugador.png" alt="icono jugador" width="80" class="img-player"/>
+      <img src="~/images/ruleta/jugador.png" alt="icono jugador" width="80" class="img-player"/>
       <div>   
         <p class="nombre-jugador">@ViewBag.Usuario</p>
         <div class="personajes">
@@ -31,13 +31,13 @@
           <img src="~/images/personajes/Entretenimiento.png" alt="" width="40">
         </div>
       </div>
-      <img src="~/images/jugador.png" alt="icono jugador" width="80" class="img-player"/>
+      <img src="~/images/ruleta/jugador.png" alt="icono jugador" width="80" class="img-player"/>
     </div>
   </div>
   <div class="tablero-padre">
     <div class="tablero">
-      <img src="~/images/imagen-ruleta.png" id="ruleta" />
-      <img src="~/images/boton-ruleta.png" id="boton" />
+      <img src="~/images/ruleta/imagen-ruleta.png" id="ruleta" />
+      <img src="~/images/ruleta/boton-ruleta.png" id="boton" />
     </div>
   </div>
       <form method="post" action="Pregunta">
@@ -91,7 +91,7 @@ function girar() {
 			}
       setTimeout(() => {
         botonFormulario.click();
-      }, 2000)
+      }, 2000);
 		}, 2500);
 	}
 }
