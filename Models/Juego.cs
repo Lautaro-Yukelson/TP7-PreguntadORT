@@ -21,7 +21,7 @@ public static class Juego
     public static void InicializarJuego()
     {
         _username = "";
-        _dificultad = 1;
+        _dificultad = 0;
         _puntajeActual = 0;
         _cantidadPreguntasCorrectas = 0;
     }
@@ -36,6 +36,11 @@ public static class Juego
     {
         _dificultades = BD.ObtenerDificultades();
         return _dificultades;
+    }
+
+    public static string ObtenerUsuario()
+    {
+        return _username;
     }
 
     public static void CargarPartida(string username, int dificultad)

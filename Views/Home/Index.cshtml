@@ -2,7 +2,84 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="pagina-presentacion">
+    <div class="title-wrapper">
+        <h1 class="sweet-title">PREGUNTADOS</h1>
+        <span class="bottom-title">Por Iair Steimberg y Lautaro Yukelson</span>
+    </div>
+
+    <button
+        type="button"
+        class="jugar"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+    >
+        Vamos!
+    </button>
+
+    <!-- Modal -->
+    <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Configurá tu juego...
+                    </h1>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Home/Comenzar" class="formulario-configuracion">
+                        <input type="text" class="form-control" name="username" placeholder="Tu nombre..." required>
+                        <div class="botones-dificultades">       
+                            <input id="dificultad" type="number" name="dificultad" hidden required>             
+                            <button type="button" id="1" class="btn-dificultad jugar">Facil</button>
+                            <button type="button" id="2" class="btn-dificultad jugar">Normal</button>
+                            <button type="button" id="3" class="btn-dificultad jugar">Dificil</button>
+                        </div>
+                        <button id="enviar" type="submit" hidden></button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button type="button" class="btn btn-primary" id="enviar-falso">Ahora jugar!</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const botones = document.querySelectorAll(".btn-dificultad");
+        const dificultad = document.querySelector("#dificultad");
+        const enviar = document.querySelector("#enviar");
+        const enviarFalso = document.querySelector("#enviar-falso");
+
+        botones.forEach(boton => {
+            boton.addEventListener("click", function() {
+                botones.forEach(b => b.classList.remove("active"));
+                boton.classList.add("active");
+                dificultad.value = boton.id;
+            });
+        });
+
+        enviarFalso.addEventListener("click", function() {
+            enviar.click();
+        });
+    });
+</script>
+

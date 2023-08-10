@@ -34,7 +34,7 @@ public static class BD
 
     public static List<Pregunta> ObtenerPreguntas(int idDificultad)
     {
-        string sql = "exec sp_ObtenerPreguntas @iddificultad, @idcategoria;";
+        string sql = "exec sp_ObtenerPreguntas @iddificultad;";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             return db.Query<Pregunta>(sql, new { iddificultad = idDificultad }).ToList();
@@ -49,7 +49,7 @@ public static class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             foreach (Pregunta pregunta in preguntas)
-{
+            {
                 respuestas.AddRange(db.Query<Respuesta>(sql, new { idPregunta = pregunta.idPregunta }).ToList());
             }
         }
@@ -57,7 +57,8 @@ public static class BD
         return respuestas;
     }
 
-    public static Respuesta ObtenerRespuesta(int idRespuesta){
+    public static Respuesta ObtenerRespuesta(int idRespuesta)
+    {
         string sql = "SELECT * FROM Respuestas WHERE idRespuesta = @idrespuesta";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {

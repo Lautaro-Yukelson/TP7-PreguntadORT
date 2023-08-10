@@ -32,12 +32,13 @@ public class HomeController : Controller
     {
         Juego.InicializarJuego();
         Juego.CargarPartida(username, dificultad);
-        return RedirectToAction("Juego", "Home");
+        return RedirectToAction("Jugar", "Home");
     }
 
     public IActionResult Jugar()
     {
         ViewBag.Categorias = Juego.ObtenerCategorias();
+        ViewBag.Usuario = Juego.ObtenerUsuario();
         return View();
     }
 
