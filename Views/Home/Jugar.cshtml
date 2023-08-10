@@ -41,17 +41,12 @@
     </div>
   </div>
       <form method="post" action="Pregunta">
-        <input type="number" name="idCategoria" id="idCategoria" class="form-control">
+        <input type="text" name="idCategoria" id="idCategoria" class="form-control" hidden>
+        <button type="submit" id="botonFormulario" hidden></button>
       </form>
 </div>
 
 <script>
-
-function getRandomInt(min, max) {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min) + min);
-}
 
 function girar() {
 	let valor = getRandomInt(0, 360);
@@ -63,31 +58,40 @@ function girar() {
 		setTimeout(() => {
 			switch (true) {
 				case valor > 0 && valor <= m:
-					alert("Historia");
+					//alert("Historia");
+          idCategoria.value = "@ViewBag.Categorias[5].idCategoria";
 					break;
 				case valor > m && valor <= m * 3:
-					alert("Deportes");
+					//alert("Deportes");
+          idCategoria.value = "@ViewBag.Categorias[2].idCategoria";
 					break;
 				case valor > m * 3 && valor <= m * 5:
-					alert("Arte");
+					//alert("Arte");
+          idCategoria.value = "@ViewBag.Categorias[0].idCategoria";
 					break;
 				case valor > m * 5 && valor <= m * 7:
-					alert("Entretenimiento");
+					//alert("Entretenimiento");
+          idCategoria.value = "@ViewBag.Categorias[3].idCategoria";
 					break;
 				case valor > m * 7 && valor <= m * 9:
 					alert("Corona");
 					break;
 				case valor > m * 9 && valor <= m * 11:
-					alert("Geografia");
+					//alert("Geografia");
+          idCategoria.value = "@ViewBag.Categorias[4].idCategoria";
 					break;
 				case valor > m * 11 && valor <= m * 13:
-					alert("Ciencias");
+					//alert("Ciencias");
+          idCategoria.value = "@ViewBag.Categorias[1].idCategoria";
 					break;
 				default:
-					alert("Historia");
+					//alert("Historia");
+          idCategoria.value = "@ViewBag.Categorias[5].idCategoria";
 					break;
 			}
-      alert("@ViewBag.Categorias[0].Nombre"); // FALTA
+      setTimeout(() => {
+        botonFormulario.click();
+      }, 2000)
 		}, 2500);
 	}
 }
@@ -95,8 +99,9 @@ function girar() {
 document.addEventListener("DOMContentLoaded", () => {
     const ruleta = document.querySelector("#ruleta");
     const boton = document.querySelector("#boton");
-	const input = document.querySelector("idCategoria");
+    const idCategoria = document.querySelector("#idCategoria");
+    const botonFormulario = document.querySelector("#botonFormulario");
     boton.addEventListener("click", girar);
-})
+});
 
 </script>

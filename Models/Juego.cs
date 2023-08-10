@@ -7,7 +7,7 @@ using System.Runtime.InteropServices.ComTypes;
 public static class Juego
 {
     private static string _username { get; set; }
-    private static int _dificultad {get; set;}
+    private static int _dificultad { get; set; }
     private static double _puntajeActual { get; set; }
     private static int _cantidadPreguntasCorrectas { get; set; }
     private static int _puntosDefault { get; set; } = 10;
@@ -50,18 +50,21 @@ public static class Juego
     {
         if (_preguntas.Count == 0) { return null; }
         List<Pregunta> _preguntasPosibles = new List<Pregunta>();
-        foreach (Pregunta pregunta in _preguntas){
-            if(pregunta.idCategoria == idCategoria){
+        foreach (Pregunta pregunta in _preguntas)
+        {
+            if (pregunta.idCategoria == idCategoria)
+            {
                 _preguntasPosibles.Add(pregunta);
             }
         }
         return _preguntasPosibles[_random.Next(0, _preguntasPosibles.Count)];
     }
 
-    public static List<Respuesta> ObtenerProximasRespuestas(Pregunta pregunta){
+    public static List<Respuesta> ObtenerProximasRespuestas(Pregunta pregunta)
+    {
         List<Pregunta> __preguntas = new List<Pregunta>();
         __preguntas.Add(pregunta);
-        return BD.ObtenerRespuestas(__preguntas);   
+        return BD.ObtenerRespuestas(__preguntas);
     }
 
     public static bool VerificarRespuesta(int idPregunta, int idRespuesta)
