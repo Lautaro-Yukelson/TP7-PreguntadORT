@@ -58,13 +58,17 @@
     function correcto(boton){
         boton.style.backgroundColor = "green";
         correcta.value = 1;
-        enviar.click();
+        setTimeout(() => {
+            enviar.click();
+        }, 2000);
     }
 
     function incorrecto(boton){
         boton.style.backgroundColor = "red";
         correcta.value = 0;
-        enviar.click();
+        setTimeout(() => {
+            enviar.click();
+        }, 2000);
     }
 
     document.addEventListener("DOMContentLoaded", () => {

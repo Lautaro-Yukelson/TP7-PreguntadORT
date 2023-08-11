@@ -8,9 +8,10 @@ public static class Juego
 {
     private static string _username { get; set; }
     private static int _dificultad { get; set; }
+    private static Dificultad _dif { get; set; }
     private static double _puntajeActual { get; set; }
     private static int _cantidadPreguntasCorrectas { get; set; }
-    private static int _puntosDefault { get; set; } = 10;
+    private static int _puntosDefault { get; set; }
 
     private static List<Pregunta> _preguntas = new List<Pregunta>();
     private static List<Respuesta> _respuestas = new List<Respuesta>();
@@ -23,6 +24,7 @@ public static class Juego
         _username = "";
         _puntajeActual = 0;
         _cantidadPreguntasCorrectas = 0;
+        _puntosDefault = 10;
     }
 
     public static List<Categoria> ObtenerCategorias()
@@ -51,6 +53,7 @@ public static class Juego
     {
         _username = username;
         _dificultad = dificultad;
+        _dif = BD.ObtenerDificultad(dificultad);
         _preguntas = BD.ObtenerPreguntas(dificultad);
         _respuestas = BD.ObtenerRespuestas(_preguntas);
     }
@@ -71,14 +74,13 @@ public static class Juego
 
     public static List<Respuesta> ObtenerProximasRespuestas(Pregunta pregunta)
     {
-        List<Pregunta> __preguntas = new List<Pregunta>();
-        __preguntas.Add(pregunta);
+        List<Pregunta> __preguntas = new() { pregunta };
         return BD.ObtenerRespuestas(__preguntas);
     }
 
     public static void EliminarPregunta(int idPregunta, int correcta)
     {
-        Pregunta preguntaAEliminar = null;
+        Pregunta? preguntaAEliminar = null;
         foreach (Pregunta pregunta in _preguntas)
         {
             if (pregunta.idPregunta == idPregunta)
@@ -86,9 +88,11 @@ public static class Juego
                 preguntaAEliminar = pregunta;
             }
         }
-        if (preguntaAEliminar != null)
+        _preguntas.Remove(preguntaAEliminar);
+        if (correcta == 1)
         {
-            _preguntas.Remove(preguntaAEliminar);
+            _puntajeActual += _puntosDefault * _dif.Multiplicador;
+            _cantidadPreguntasCorrectas++;
         }
     }
 }

@@ -23,6 +23,16 @@ public static class BD
         }
     }
 
+    //Temp
+    public static Dificultad ObtenerDificultad(int id)
+    {
+        string sql = "SELECT * FROM Dificultades WHERE idDificultad = @idDificultad;";
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            return db.Query<Dificultad>(sql, new { idDificultad = id }).SingleOrDefault();
+        }
+    }
+
     public static List<Dificultad> ObtenerDificultades()
     {
         string sql = "SELECT * FROM Dificultades;";
