@@ -21,7 +21,6 @@ public static class Juego
     public static void InicializarJuego()
     {
         _username = "";
-        _dificultad = 0;
         _puntajeActual = 0;
         _cantidadPreguntasCorrectas = 0;
     }
@@ -41,6 +40,11 @@ public static class Juego
     public static string ObtenerUsuario()
     {
         return _username;
+    }
+
+    public static double ObtenerPuntajeActual()
+    {
+        return _puntajeActual;
     }
 
     public static void CargarPartida(string username, int dificultad)
@@ -72,24 +76,19 @@ public static class Juego
         return BD.ObtenerRespuestas(__preguntas);
     }
 
-    public static bool VerificarRespuesta(int idPregunta, int idRespuesta)
+    public static void EliminarPregunta(int idPregunta, int correcta)
     {
-        Pregunta pregunta_encontrada = new Pregunta();
-        Respuesta respuesta_encontrada = new Respuesta();
-        Dificultad dificultad_encontrada = new Dificultad();
-
-        foreach (Pregunta pregunta in _preguntas) { if (pregunta.idPregunta == idPregunta) { pregunta_encontrada = pregunta; } }
-        foreach (Respuesta respuesta in _respuestas) { if (respuesta.idRespuesta == idRespuesta) { respuesta_encontrada = respuesta; } }
-        foreach (Dificultad dificultad in _dificultades) { if (dificultad.idDificultad == pregunta_encontrada.idDificultad) { dificultad_encontrada = dificultad; } }
-
-        _preguntas.Remove(pregunta_encontrada);
-
-        if (respuesta_encontrada.Correcta)
+        Pregunta preguntaAEliminar = null;
+        foreach (Pregunta pregunta in _preguntas)
         {
-            _puntajeActual += _puntosDefault * dificultad_encontrada.Multiplicador;
-            return true;
+            if (pregunta.idPregunta == idPregunta)
+            {
+                preguntaAEliminar = pregunta;
+            }
         }
-
-        return false;
+        if (preguntaAEliminar != null)
+        {
+            _preguntas.Remove(preguntaAEliminar);
+        }
     }
 }

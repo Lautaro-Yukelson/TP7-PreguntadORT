@@ -39,6 +39,7 @@ public class HomeController : Controller
     {
         ViewBag.Categorias = Juego.ObtenerCategorias();
         ViewBag.Usuario = Juego.ObtenerUsuario();
+        ViewBag.PuntajeActual = Juego.ObtenerPuntajeActual();
         return View();
     }
 
@@ -46,6 +47,8 @@ public class HomeController : Controller
     public IActionResult Pregunta(int idCategoria)
     {
         ViewBag.Pregunta = Juego.ObtenerProximaPregunta(idCategoria);
+        List<Categoria> _categorias = Juego.ObtenerCategorias();
+        foreach (Categoria categoria in _categorias) { if (categoria.idCategoria == idCategoria) { ViewBag.Categoria = categoria; } }
         if (ViewBag.Pregunta != null)
         {
             ViewBag.Respuestas = Juego.ObtenerProximasRespuestas(ViewBag.Pregunta);
@@ -58,9 +61,9 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult VerificarRespuesta(int idPregunta, int idRespuesta)
+    public IActionResult TerminarPregunta(int idPregunta, int correcta)
     {
-        bool correcto = Juego.VerificarRespuesta(idPregunta, idRespuesta);
+        Juego.EliminarPregunta(idPregunta, correcta);
         return RedirectToAction("Ruleta", "Home");
     }
 

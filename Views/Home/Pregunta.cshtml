@@ -2,11 +2,16 @@
     ViewData["Title"] = "Pregunta";
 }
 
+<style>
+    .cabecera-preguntas{
+        background-color: @ViewBag.Categoria.ColorFondo;
+    }
+</style>
+
 <div class="pagina-pregunta">
     <header class="cabecera-preguntas">
         <div class="info-head">
-            <img src="" alt="">
-            <p>Deportes</p>
+            <p>@ViewBag.Categoria.Nombre</p>
             <p id="contador">30''</p>
         </div>
         <div class="barra-carga barra-crece"></div>
@@ -20,11 +25,16 @@
         <div class="opciones">
             @{
                 foreach(Respuesta respuesta in @ViewBag.Respuestas){
-                    <div class="opcion">
+                    <button class="opcion" id="@respuesta.Opcion" data-correcta="@respuesta.Correcta">
                         <p>@respuesta.Contenido</p>
-                    </div>
+                    </button>
                 }
             }
+            <form method="post" action="TerminarPregunta">
+                <input type="number" name="idPregunta" value="@ViewBag.Respuestas[0].idPregunta" hidden>
+                <input type="number" name="correcta" id="correcta" hidden>
+                <button type="submit" id="enviar" hidden></button>
+            </form>
         </div>
     </main>
     <footer class="ayudas">
@@ -37,16 +47,38 @@
 
 <script>
     function contador(objeto, tiempo, intervalo){
-    window.setInterval(function(){
-        if(tiempo >= 0){
-            objeto.textContent = tiempo + "''";
-            tiempo--;
-        }
-    }, intervalo * 1000);
+        window.setInterval(function(){
+            if(tiempo >= 0){
+                objeto.textContent = tiempo + "''";
+                tiempo--;
+            }
+        }, intervalo * 1000);
+    }
+
+    function correcto(boton){
+        boton.style.backgroundColor = "green";
+        correcta.value = 1;
+        enviar.click();
+    }
+
+    function incorrecto(boton){
+        boton.style.backgroundColor = "red";
+        correcta.value = 0;
+        enviar.click();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-        let objeto = document.getElementById("contador")
+        const botones = document.querySelectorAll(".opcion");
+        const objeto = document.getElementById("contador");
+        const enviar = document.querySelector("#enviar");
+        const correcta = document.querySelector("#correcta");
+
+        botones.forEach(boton => {
+            boton.addEventListener("click", function() {
+                (boton.dataset.correcta == "True") ? correcto(boton) : incorrecto(boton);
+            });
+        });
+
         contador(objeto, 29, 1);
-    })
+    });
 </script>
