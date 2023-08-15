@@ -264,6 +264,7 @@ body{
   filter: grayscale();
 }
 
+
 /*****************************************************Pregunta*****************************************************/
 .pagina-pregunta{
   height: 100%;
@@ -359,12 +360,13 @@ body{
   display: flex;
   justify-content: space-between;
   background-color: #fff;
-  border: 3px solid #c5c3c3;
-  border-bottom: none;
   border-radius: 20px 20px 0px 0px;
 }
 
-.ayudas div{
+.ayudas button{
+  background: none;
+  border: 3px solid #c5c3c3;
+  border-bottom: none;
   width: 100%;
   display: flex;
   justify-content: center;

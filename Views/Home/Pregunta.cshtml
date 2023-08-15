@@ -6,6 +6,19 @@
     .cabecera-preguntas{
         background-color: @ViewBag.Categoria.ColorFondo;
     }
+
+    .correcta{
+        background: green;
+    }
+
+    .incorrecta{
+        background: red;
+    }
+
+    .noValida{
+        background: rgb(111, 111, 111);
+        color: black;
+    }
 </style>
 
 <div class="pagina-pregunta">
@@ -24,10 +37,11 @@
         </div>
         <div class="opciones">
             @{
-                foreach(Respuesta respuesta in @ViewBag.Respuestas){
-                    <button class="opcion" id="@respuesta.Opcion" data-correcta="@respuesta.Correcta">
-                        <p>@respuesta.Contenido</p>
-                    </button>
+                foreach (Respuesta respuesta in @ViewBag.Respuestas)
+                {
+                            <button class="opcion" id="@respuesta.Opcion" data-correcta="@respuesta.Correcta">
+                                <p>@respuesta.Contenido</p>
+                            </button>
                 }
             }
             <form method="post" action="TerminarPregunta">
@@ -38,51 +52,25 @@
         </div>
     </main>
     <footer class="ayudas">
-        <div class="bomba borde-der"><img src="~/images/pregunta/bomba.png" alt="bomba"></div>
-        <div class="doble borde-der"><img src="~/images/pregunta/doble.png" alt="doble"></div>
-        <div class="tick borde"><img src="~/images/pregunta/tick.png" alt="tick"></div>
+        <button class="ayuda bomba borde-der" onclick="ayuda(this)" data-tipo="bomba"><img src="~/images/pregunta/bomba.png" alt="Bomba ICO"></button>
+        <button class="ayuda doble borde-der" onclick="ayuda(this)" data-tipo="doble"><img src="~/images/pregunta/doble.png" alt="DobleChance ICO"></button>
+        <button class="ayuda tick borde"  onclick="ayuda(this)" data-tipo="tick"><img src="~/images/pregunta/tick.png" alt="Tick ICO"></button>
     </footer>
 </div>
 
 
 <script>
-    function contador(objeto, tiempo, intervalo){
-        window.setInterval(function(){
-            if(tiempo >= 0){
-                objeto.textContent = tiempo + "''";
-                tiempo--;
-            }
-        }, intervalo * 1000);
-    }
-
-    function correcto(boton){
-        boton.style.backgroundColor = "green";
-        correcta.value = 1;
-        setTimeout(() => {
-            enviar.click();
-        }, 2000);
-    }
-
-    function incorrecto(boton){
-        boton.style.backgroundColor = "red";
-        correcta.value = 0;
-        setTimeout(() => {
-            enviar.click();
-        }, 2000);
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
-        const botones = document.querySelectorAll(".opcion");
-        const objeto = document.getElementById("contador");
+        const opciones = document.querySelectorAll(".opcion");
         const enviar = document.querySelector("#enviar");
-        const correcta = document.querySelector("#correcta");
+        const cont = document.getElementById("contador");
 
-        botones.forEach(boton => {
-            boton.addEventListener("click", function() {
-                (boton.dataset.correcta == "True") ? correcto(boton) : incorrecto(boton);
+        opciones.forEach(opcion => {
+            opcion.addEventListener("click", () => {
+                clickOpcion(opcion);
             });
         });
 
-        contador(objeto, 29, 1);
+        contador(cont, 29, 1);
     });
 </script>
