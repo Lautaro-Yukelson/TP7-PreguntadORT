@@ -80,3 +80,9 @@ function enviarOpcion() {
 	}, 1000);
 }
 
+function advanceCharBy(char, distance) {
+	oldCode = char.charCodeAt(0);
+	newCode = 65 + (oldCode - 65 + 26 + distance) % 26;
+	const newChar = String.fromCharCode(newCode);
+	return newChar;
+};
