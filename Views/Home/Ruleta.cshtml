@@ -44,6 +44,58 @@
         <input type="text" name="idCategoria" id="idCategoria" class="form-control" hidden>
         <button type="submit" id="botonFormulario" hidden></button>
       </form>
+
+       <button
+        type="button"
+        id="botonCorona"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        hidden
+      >
+        Vamos!
+    </button> 
+
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog modal-dialog-centered" id="modal-corona">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Elige una categoria..
+                    </h1>
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Home/Comenzar" class="formulario-configuracion">
+                        <input type="text" class="form-control inputNombre" name="username" placeholder="Tu nombre..." autocomplete="off" required hidden>
+                        <div class="botones-dificultades">       
+                            <input id="dificultad" type="number" name="dificultad" required hidden>             
+                            <button type="button" id="1" class="btn-categoria jugar"><img src="~/images/personajes/Entretenimiento.png" alt="" width="40"></button>
+                            <button type="button" id="2" class="btn-categoria jugar"><img src="~/images/personajes/Arte.png" alt="" width="40"></button>
+                            <button type="button" id="3" class="btn-categoria jugar"><img src="~/images/personajes/Deporte.png" alt="" width="40"></button>
+                            <button type="button" id="3" class="btn-categoria jugar"><img src="~/images/personajes/Historia.png" alt="" width="40"></button>
+                            <button type="button" id="3" class="btn-categoria jugar"><img src="~/images/personajes/Ciencia.png" alt="" width="40"></button>
+                            <button type="button" id="3" class="btn-categoria jugar"><img src="~/images/personajes/Geografia.png" alt="" width="40"></button>
+                        </div>
+                        <button id="enviar" type="submit" hidden></button>
+                    </form>
+                </div>
+                <div class="modal-footer">  
+                    <button type="button" class="jugar" id="enviar-falso">Aceptar</button>
+                </div>
+            </div>
+        </div>
+
 </div>
 
 <script>
@@ -54,6 +106,7 @@ function girar() {
 
 	function calcular(valor) {
 		var m = 360 / 7 / 2;
+    valor = m * 7 + 1;
 		ruleta.style.transform = "rotate(" + (0 - valor) + "deg)";
 		setTimeout(() => {
 			switch (true) {
@@ -74,7 +127,8 @@ function girar() {
           idCategoria.value = "@ViewBag.Categorias[3].idCategoria";
 					break;
 				case valor > m * 7 && valor <= m * 9:
-					alert("Corona");
+          //alert("Corona");
+					botonCorona.click();
 					break;
 				case valor > m * 9 && valor <= m * 11:
 					//alert("Geografia");
@@ -89,9 +143,12 @@ function girar() {
           idCategoria.value = "@ViewBag.Categorias[5].idCategoria";
 					break;
 			}
-      setTimeout(() => {
-        botonFormulario.click();
-      }, 2000);
+      if (!(valor > m * 7 && valor <= m * 9)){
+        setTimeout(() => {
+          botonFormulario.click();
+        }, 2000);
+      }
+
 		}, 2500);
 	}
 }
@@ -101,7 +158,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const boton = document.querySelector("#boton");
     const idCategoria = document.querySelector("#idCategoria");
     const botonFormulario = document.querySelector("#botonFormulario");
+    const botonCorona = document.querySelector("#botonCorona");
     boton.addEventListener("click", girar);
+
+
+    const botones = document.querySelectorAll(".btn-categoria");
+    botones.forEach(boton => {
+        boton.addEventListener("click", function() {
+            botones.forEach(b => b.classList.remove("active"));
+            boton.classList.add("active");
+        });
+    });
+
+
+
 });
 
 </script>
