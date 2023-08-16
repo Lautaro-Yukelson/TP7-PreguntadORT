@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj": {}
+    "C:\\Users\\47569125\\Desktop\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj": {
+    "C:\\Users\\47569125\\Desktop\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj",
+        "projectUniqueName": "C:\\Users\\47569125\\Desktop\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj",
         "projectName": "TP7-PreguntadORT",
-        "projectPath": "C:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj",
-        "packagesPath": "C:\\Users\\lyuke\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lyuke\\Desktop\\Proyectos\\ORT\\mvc\\TP7-PreguntadORT\\obj\\",
+        "projectPath": "C:\\Users\\47569125\\Desktop\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj",
+        "packagesPath": "C:\\Users\\47569125\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\47569125\\Desktop\\TP7-PreguntadORT\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lyuke\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\47569125\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -66,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

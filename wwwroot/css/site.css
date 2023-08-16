@@ -74,17 +74,17 @@ body{
 .sweet-title {
   width:  830px;
   order: 2;
-  color: #fde9ff;
+  color: #fff;
   font-weight: 900;
   text-transform: uppercase;
   text-align: center;
   font-size: clamp(3rem, 10vw, 6rem);
-  text-shadow: 3px 1px 1px #4af7ff, 2px 2px 1px #165bfb, 4px 2px 1px #4af7ff,
-    3px 3px 1px #165bfb, 5px 3px 1px #4af7ff, 4px 4px 1px #165bfb,
-    6px 4px 1px #4af7ff, 5px 5px 1px #165bfb, 7px 5px 1px #4af7ff,
-    6px 6px 1px #165bfb, 8px 6px 1px #4af7ff, 7px 7px 1px #165bfb,
-    9px 7px 1px #4af7ff;
-}
+  text-shadow: 3px 1px 1px #a932b5, 2px 2px 1px #922b8c, 4px 2px 1px #8e44ad,
+    3px 3px 1px #6c3483, 5px 3px 1px #8e44ad, 4px 4px 1px #6c3483,
+    6px 4px 1px #8e44ad, 5px 5px 1px #6c3483, 7px 5px 1px #8e44ad,
+    6px 6px 1px #6c3483, 8px 6px 1px #8e44ad, 7px 7px 1px #6c3483,
+    9px 7px 1px #8e44ad;
+  }
 
 .jugar{
   position:relative;
@@ -167,6 +167,80 @@ body{
   -moz-box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #915100;
   box-shadow:inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
 }
+
+.modal-header{
+  color: #fff;
+  background-color: #519152;
+  border: none;
+}
+
+.modal-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #39547d;
+  border: none;
+}
+
+.modal-body{
+  height: 450px;
+  background: url("../images/fondo-form.jpg");
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content{
+  border-radius: 20px;
+}
+
+.formulario-configuracion{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 300px;
+}
+
+.form-control{
+  border: 2px solid black;
+  box-shadow: none;
+  outline: none;
+}
+.form-control:focus {
+  border: 2px solid black;
+  outline: none;
+  box-shadow: none;
+}
+
+.cyclic_input {
+    float: left;
+    padding: 1rem;
+    font-size: 5rem;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #fff;
+    margin-right: 20px;
+    border-radius: 20px;
+    border: 2px solid black;
+    width: 100px;
+    height: 150px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+.cyclic_input:before,
+.cyclic_input:after {
+    display: block;
+    position: absolute;
+    left: 50%;
+    font-size: 1rem;
+    transform: translateX(-50%);
+}
+
 /*****************************************************Ruleta*****************************************************/
 .pagina-ruleta {
   height: 100%;
