@@ -214,31 +214,22 @@ body{
   box-shadow: none;
 }
 
-.cyclic_input {
-    float: left;
-    padding: 1rem;
-    font-size: 5rem;
-    position: relative;
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    background-color: #fff;
-    margin-right: 20px;
-    border-radius: 20px;
-    border: 2px solid black;
-    width: 100px;
-    height: 150px;
-    padding-right: 10px;
-    padding-left: 10px;
-  }
+.inputs_arcade{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
-.cyclic_input:before,
-.cyclic_input:after {
-    display: block;
-    position: absolute;
-    left: 50%;
-    font-size: 1rem;
-    transform: translateX(-50%);
+.cyclic_input {
+  width: 100px;
+  height: 150px;
+  padding: .5rem;
+  font-size: 5rem;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 2px solid black;
 }
 
 /*****************************************************Ruleta*****************************************************/
