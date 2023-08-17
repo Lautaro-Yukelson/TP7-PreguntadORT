@@ -502,7 +502,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\devandroid\\.nuget\\packages\\": {},
+    "C:\\Users\\47434208\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
@@ -511,14 +511,14 @@
       "projectUniqueName": "C:\\Users\\47434208\\Desktop\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj",
       "projectName": "TP7-PreguntadORT",
       "projectPath": "C:\\Users\\47434208\\Desktop\\TP7-PreguntadORT\\TP7-PreguntadORT.csproj",
-      "packagesPath": "C:\\Users\\devandroid\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\47434208\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\47434208\\Desktop\\TP7-PreguntadORT\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\devandroid\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\47434208\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
