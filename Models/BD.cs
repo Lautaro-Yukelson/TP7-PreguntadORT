@@ -76,12 +76,12 @@ public static class BD
         }
     }
 
-    public static List<Puntaje> ObtenerPuntajes()
+    public static List<Usuario> ObtenerUsuarios()
     {
-        string sql = "SELECT * FROM Puntajes;";
+        string sql = "SELECT * FROM Usuarios;";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            return db.Query<Puntaje>(sql).ToList();
+            return db.Query<Usuario>(sql).ToList();
         }
     }
 
@@ -94,12 +94,12 @@ public static class BD
         }
     }
 
-    public static void AgregarPuntaje(Puntaje puntaje)
+    public static void AgregarUsuario(Usuario usuario)
     {
-        string sql = "exec sp_AgregarPuntaje @nombre, @puntos, @fechahora";
+        string sql = "exec sp_AgregarUsuario @Nombre, @Contrasena";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            db.Execute(sql, new { nombre = puntaje.Nombre, puntos = puntaje.Puntos, fechahora = puntaje.FechaHora });
+            db.Execute(sql, new { Nombre = usuario.Nombre, Contrasena = usuario.Contrasena});
         }
     }
 

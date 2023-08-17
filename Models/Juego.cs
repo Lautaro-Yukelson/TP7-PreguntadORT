@@ -9,7 +9,6 @@ public static class Juego
     private static string _username { get; set; }
     private static int _dificultad { get; set; }
     private static Dificultad _dif { get; set; }
-    private static double _puntajeActual { get; set; }
     private static int _cantidadPreguntasCorrectas { get; set; }
     private static int _puntosDefault { get; set; }
 
@@ -22,7 +21,6 @@ public static class Juego
     public static void InicializarJuego()
     {
         _username = "";
-        _puntajeActual = 0;
         _cantidadPreguntasCorrectas = 0;
         _puntosDefault = 10;
     }
@@ -42,11 +40,6 @@ public static class Juego
     public static string ObtenerUsuario()
     {
         return _username;
-    }
-
-    public static double ObtenerPuntajeActual()
-    {
-        return _puntajeActual;
     }
 
     public static void CargarPartida(string username, int dificultad)
@@ -91,7 +84,6 @@ public static class Juego
         _preguntas.Remove(preguntaAEliminar);
         if (correcta == 1)
         {
-            _puntajeActual += _puntosDefault * _dif.Multiplicador;
             _cantidadPreguntasCorrectas++;
         }
     }
