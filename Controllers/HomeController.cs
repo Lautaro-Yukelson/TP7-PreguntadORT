@@ -39,6 +39,7 @@ public class HomeController : Controller
     {
         ViewBag.Categorias = Juego.ObtenerCategorias();
         ViewBag.Usuario = Juego.ObtenerUsuario();
+        ViewBag.PuntajeActual = Juego.ObtenerPuntajeActual();
         return View();
     }
 
