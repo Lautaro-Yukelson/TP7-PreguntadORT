@@ -1,0 +1,208 @@
+@{
+    ViewData["Title"] = "Lobby";
+}
+
+<div class="multi">
+    <nav class="modal-header nav">
+        <a href="@Url.Action("Index", "Home")"><img src="~/favicon.ico" alt="" width="60"><a>
+                <h1>Multijugador</h1>
+                <a href="@Url.Action("CerrarSesion", "Home")"><svg xmlns="http://www.w3.org/2000/svg" width="40"
+                        height="40" viewBox="0 0 24 24" style="fill: #fff;transform: ;msFilter:;">
+                        <path d="M16 13v-2H7V8l-5 4 5 4v-3z"></path>
+                        <path
+                            d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z">
+                        </path>
+                    </svg></a>
+    </nav>
+
+    <div class="partidas-container">
+        <div class="partidas">
+            <p class="p">Partidas</p>
+            @foreach (Partida partida in ViewBag.Partidas)
+            {
+                <div class="partida">
+                    @if (ViewBag.UsuarioLOG == partida.idUsuario1)
+                    {
+                        <div class="jugador1">
+                            <p>@ObtenerNombreUsuario(partida.idUsuario1)</p>
+                            <div class="categorias">
+                                @foreach (Categoria categoria in ViewBag.Categorias)
+                                {
+                                    <img src=@categoria.Foto alt="" width="40" class=@ObtenerEstadoCategoria(partida,
+                            categoria.idCategoria, 1)>
+                                }
+                            </div>
+                        </div>
+                        <button type="button" class="jugar chico continuar @DefinirTurno(partida)"
+                            data-idPartida="@partida.idPartida">Continuar</button>
+                        <div class="jugador2">
+                            <p>@ObtenerNombreUsuario(partida.idUsuario2)</p>
+                            <div class="categorias">
+                                @foreach (Categoria categoria in ViewBag.Categorias)
+                                {
+                                    <img src=@categoria.Foto alt="" width="40" class=@ObtenerEstadoCategoria(partida,
+                            categoria.idCategoria, 2)>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="jugador2">
+                            <p>@ObtenerNombreUsuario(partida.idUsuario2)</p>
+                            <div class="categorias">
+                                @foreach (Categoria categoria in ViewBag.Categorias)
+                                {
+                                    <img src=@categoria.Foto alt="" width="40" class=@ObtenerEstadoCategoria(partida,
+                            categoria.idCategoria, 2)>
+                                }
+                            </div>
+                        </div>
+                        <button type="button" class="jugar chico continuar @DefinirTurno(partida)"
+                            data-idPartida="@partida.idPartida">Continuar</button>
+                        <div class="jugador1">
+                            <p>@ObtenerNombreUsuario(partida.idUsuario1)</p>
+                            <div class="categorias">
+                                @foreach (Categoria categoria in ViewBag.Categorias)
+                                {
+                                    <img src=@categoria.Foto alt="" width="40" class=@ObtenerEstadoCategoria(partida,
+                            categoria.idCategoria, 1)>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+            <form action="/Home/Ruleta" method="post">
+                <input type="number" name="idPartida" id="idPartida" required hidden>
+                <button type="submit" id="btn-continuar" hidden></button>
+            </form>
+            <div class="btnContinuar">
+                <button type="button" class="jugar crear" data-bs-toggle="modal" data-bs-target="#create"> Crear
+                    Partida</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header header-crearPartida">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body body-crearPartida" id="config">
+                    <form method="post" action="/Home/CrearPartida" class="formulario-configuracion">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupSelect01">Usuarios</label>
+                            <select class="form-select" id="inputGroupSelect01" name="idUsuarioVS">
+                                @foreach (Usuario user in ViewBag.Usuarios)
+                                {
+                                    if (user.idUsuario != ViewBag.UsuarioLOG)
+                                    {
+                                        <option value="@user.idUsuario">@user.Nombre</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        @*<div class="botones-dificultades">
+                        <input id="dificultad" type="number" name="dificultad" required hidden>
+                        <button type="button" id="1" class="btn-dificultad jugar">Facil</button>
+                        <button type="button" id="2" class="btn-dificultad jugar">Normal</button>
+                        <button type="button" id="3" class="btn-dificultad jugar">Dificil</button>
+                        </div>*@
+                        <button type="submit" class="jugar">Crear partida!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const botones = document.querySelectorAll(".continuar");
+        const enviar = document.querySelector("#btn-continuar")
+
+        botones.forEach(boton => {
+            boton.addEventListener("click", () => {
+                console.log("HOLA");
+                if (!boton.classList.contains("Esperando")) {
+                    const idPartida = boton.getAttribute("data-idPartida");
+                    document.getElementById("idPartida").value = idPartida;
+                    enviar.click();
+                }
+            });
+        });
+    });
+</script>
+
+@functions {
+    public string ObtenerNombreUsuario(int idUsuario)
+    {
+        foreach (Usuario usuario in ViewBag.Usuarios)
+        {
+            if (usuario.idUsuario == idUsuario)
+            {
+                return usuario.Nombre;
+            }
+        }
+        return "Usuario no encontrado";
+    }
+
+    public string ObtenerEstadoCategoria(Partida partida, int idCategoria, int jugador)
+    {
+        Progreso progreso = null;
+
+        if (jugador == 1)
+        {
+            foreach (Progreso p in ViewBag.Progresos)
+            {
+                if (p.idProgreso == partida.idProgreso1)
+                {
+                    progreso = p;
+                }
+            }
+        }
+        else if (jugador == 2)
+        {
+            foreach (Progreso p in ViewBag.Progresos)
+            {
+                if (p.idProgreso == partida.idProgreso2)
+                {
+                    progreso
+                    = p;
+                }
+            }
+        }
+
+        switch (idCategoria)
+        {
+            case 1:
+                if (progreso.Arte) { return ""; }
+                break;
+            case 2:
+                if (progreso.Ciencia) { return ""; }
+                break;
+            case 3:
+                if (progreso.Deporte) { return ""; }
+                break;
+            case 4:
+                if (progreso.Entretenimiento) { return ""; }
+                break;
+            case 5:
+                if (progreso.Geografia) { return ""; }
+                break;
+            case 6:
+                if (progreso.Historia) { return ""; }
+                break;
+        }
+        return "b-n";
+    }
+    public string DefinirTurno(Partida partida)
+    {
+        return Juego.ObtenerIdUsuarioCookie(ViewBag.Context) != partida.Turno ? "Esperando" : "Continuar";
+    }
+
+}

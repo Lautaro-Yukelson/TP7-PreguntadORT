@@ -1,0 +1,28 @@
+// CREAR UNA COOKIE
+CookieOptions options = new CookieOptions
+{
+    Expires = DateTime.Now.AddDays(7)
+};
+Response.Cookies.Append("NOMBRE", VALOR.ToString(), options);
+
+// OBTENER UNA COOKIE
+if (Request.Cookies.TryGetValue("IdPartidaSeleccionada", out string idPartidaSeleccionada))
+{
+    int idPartida = Convert.ToInt32(idPartidaSeleccionada);
+    // Do something with idPartida
+}
+
+// PARA ACTUALIZAR UNA COOKIE MISMA CIENCIA QUE PARA CREARLA (SE SOBREESCRIBE)
+
+// ELIMINAR TODAS LAS COOKIES
+foreach (var cookie in Request.Cookies.Keys)
+{
+    Response.Cookies.Delete(cookie);
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+// Convertir lista a json txt para agregar a cookie
+string preguntasJson = JsonConvert.SerializeObject(Juego.ObtenerPreguntas());
+
+// Desconvertir json txt a lista de objetos
+List<Pregunta> preguntas = JsonConvert.DeserializeObject<List<Pregunta>>(preguntasJson);

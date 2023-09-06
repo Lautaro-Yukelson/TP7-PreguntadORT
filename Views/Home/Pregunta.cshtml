@@ -45,6 +45,7 @@
                 }
             }
             <form method="post" action="TerminarPregunta">
+                <input type="number" name="idPartida" value="@ViewBag.Partida.idPartida" hidden>
                 <input type="number" name="idPregunta" value="@ViewBag.Respuestas[0].idPregunta" hidden>
                 <input type="number" name="correcta" id="correcta" hidden>
                 <button type="submit" id="enviar" hidden></button>
@@ -71,6 +72,6 @@
             });
         });
 
-        contador(cont, 29, 1);
+        contador(cont, 29, 1, opciones, enviar);
     });
 </script>

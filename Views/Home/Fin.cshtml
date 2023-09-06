@@ -1,6 +1,11 @@
 @{
-    ViewData["Title"] = "Fin";
+    ViewData["Title"] = "Fin Partida";
+
 }
 
-<h1>Fin!</h1>
 
+<div class="pagina-presentacion ganaste">
+    <h1 class="sweet-title">GANASTE!!</h1>
+    <span class="bottom-title">Le ganaste a @ViewBag.Oponente</span>
+    <a href="@Url.Action("Multijugador")" class="jugar" id="volverMenu">Volver al Menu</a>
+</div>

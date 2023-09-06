@@ -1,37 +1,47 @@
 @{
-    ViewData["Title"] = "Ruleta";
+  ViewData["Title"] = "Ruleta";
+  int usuario = 0;
+  int temp = Juego.ObtenerIdUsuarioCookie(@ViewBag.Context);
+  if (temp == @ViewBag.Partida.idUsuario1)
+  {
+    usuario = 1;
+  }
+  else
+  {
+    usuario = 2;
+  }
 }
 
 <div class="pagina-ruleta">
   <div class="puntajes">
     <div class="jugador jugador-1">
-      <img src="~/images/ruleta/jugador.png" alt="icono jugador" width="80" class="img-player"/>
-      <div>   
-        <p class="nombre-jugador">@ViewBag.Usuario + @ViewBag.PuntajeActual</p>
+      <img src="~/images/ruleta/jugador.png" alt="icono jugador" width="80" class="img-player" />
+      <div>
+        <p class="nombre-jugador">@ViewBag.Usuario1.Nombre</p>
         <div class="personajes">
-          <img src="~/images/personajes/Entretenimiento.png" alt="" width="40">
-          <img src="~/images/personajes/Arte.png" alt="" width="40" class="b-n">
-          <img src="~/images/personajes/Deporte.png" alt="" width="40">
-          <img src="~/images/personajes/Historia.png" alt="" width="40" class="b-n">
-          <img src="~/images/personajes/Ciencia.png" alt="" width="40" class="b-n">
-          <img src="~/images/personajes/Geografia.png" alt="" width="40">
+          @foreach (Categoria categoria in ViewBag.Categorias)
+          {
+            <img src=@categoria.Foto alt="" width="40" class=@ObtenerEstadoCategoria(@ViewBag.Partida,
+            categoria.idCategoria, 1)>
+          }
         </div>
       </div>
     </div>
-    <div class="versus"><p>VS</p></div>
+    <div class="versus">
+      <p>VS</p>
+    </div>
     <div class="jugador jugador-2">
       <div>
-        <p class="nombre-jugador">Fernando Fernandez</p>
+        <p class="nombre-jugador">@ViewBag.Usuario2.Nombre</p>
         <div class="personajes">
-          <img src="~/images/personajes/Geografia.png" alt="" width="40">
-          <img src="~/images/personajes/Ciencia.png" alt="" width="40" class="b-n">
-          <img src="~/images/personajes/Historia.png" alt="" width="40">
-          <img src="~/images/personajes/Deporte.png" alt="" width="40" class="b-n">
-          <img src="~/images/personajes/Arte.png" alt="" width="40">
-          <img src="~/images/personajes/Entretenimiento.png" alt="" width="40">
+          @foreach (Categoria categoria in ViewBag.Categorias)
+          {
+            <img src=@categoria.Foto alt="" width="40" class=@ObtenerEstadoCategoria(@ViewBag.Partida,
+            categoria.idCategoria, 2)>
+          }
         </div>
       </div>
-      <img src="~/images/ruleta/jugador.png" alt="icono jugador" width="80" class="img-player"/>
+      <img src="~/images/ruleta/jugador.png" alt="icono jugador" width="80" class="img-player" />
     </div>
   </div>
   <div class="tablero-padre">
@@ -40,136 +50,167 @@
       <img src="~/images/ruleta/boton-ruleta.png" id="boton" />
     </div>
   </div>
-      <form method="post" action="Pregunta">
-        <input type="text" name="idCategoria" id="idCategoria" class="form-control" hidden>
-        <button type="submit" id="botonFormulario" hidden></button>
-      </form>
+  <form method="post" action="Pregunta">
+    <input type="number" name="idPartida" value="@ViewBag.Partida.idPartida" hidden>
+    <input type="number" name="idCategoria" id="idCategoria" hidden>
+    <button type="submit" id="botonFormulario" hidden></button>
+  </form>
 
-       <button
-        type="button"
-        id="botonCorona"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        hidden
-      >
-        Vamos!
-    </button> 
+  <button type="button" id="botonCorona" data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>
+    Vamos!
+  </button>
 
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-    >
-        <div class="modal-dialog modal-dialog-centered" id="modal-corona">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        Elige una categoria..
-                    </h1>
-                    <button
-                        type="button"
-                        class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                    ></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="/Home/Comenzar" class="formulario-configuracion">
-                        <input type="text" class="form-control inputNombre" name="username" placeholder="Tu nombre..." autocomplete="off" required hidden>
-                        <div class="botones-dificultades">       
-                            <input id="dificultad" type="number" name="dificultad" required hidden>             
-                            <button type="button" id="1" class="btn-categoria jugar"><img src="~/images/personajes/Entretenimiento.png" alt="" width="40"></button>
-                            <button type="button" id="2" class="btn-categoria jugar"><img src="~/images/personajes/Arte.png" alt="" width="40"></button>
-                            <button type="button" id="3" class="btn-categoria jugar"><img src="~/images/personajes/Deporte.png" alt="" width="40"></button>
-                            <button type="button" id="3" class="btn-categoria jugar"><img src="~/images/personajes/Historia.png" alt="" width="40"></button>
-                            <button type="button" id="3" class="btn-categoria jugar"><img src="~/images/personajes/Ciencia.png" alt="" width="40"></button>
-                            <button type="button" id="3" class="btn-categoria jugar"><img src="~/images/personajes/Geografia.png" alt="" width="40"></button>
-                        </div>
-                        <button id="enviar" type="submit" hidden></button>
-                    </form>
-                </div>
-                <div class="modal-footer">  
-                    <button type="button" class="jugar" id="enviar-falso">Aceptar</button>
-                </div>
-            </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" id="modal-corona">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Elige una categoria..
+          </h1>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <div class="botones-dificultades">
+            @foreach (Categoria categoria in ViewBag.Categorias)
+            {
+              if (@ObtenerEstadoCategoria(@ViewBag.Partida, categoria.idCategoria, usuario) == "b-n")
+              {
+                <button type="button" id="@categoria.idCategoria" class="btn-categoria jugar"><img src="@categoria.Foto"
+                    alt="" width="40"></button>
+              }
+            }
+          </div>
+        </div>
+      </div>
+    </div>
 
-</div>
+  </div>
 
-<script>
+  <script>
 
-function girar() {
-	let valor = getRandomInt(0, 360);
-	calcular(valor);
+    function girar() {
+      let valor = getRandomInt(0, 360);
+      calcular(valor);
 
-	function calcular(valor) {
-		var m = 360 / 7 / 2;
-    //valor = m * 7 + 1;
-		ruleta.style.transform = "rotate(" + (0 - valor) + "deg)";
-		setTimeout(() => {
-			switch (true) {
-				case valor > 0 && valor <= m:
-					//alert("Historia");
-          idCategoria.value = "@ViewBag.Categorias[5].idCategoria";
-					break;
-				case valor > m && valor <= m * 3:
-					//alert("Deportes");
-          idCategoria.value = "@ViewBag.Categorias[2].idCategoria";
-					break;
-				case valor > m * 3 && valor <= m * 5:
-					//alert("Arte");
-          idCategoria.value = "@ViewBag.Categorias[0].idCategoria";
-					break;
-				case valor > m * 5 && valor <= m * 7:
-					//alert("Entretenimiento");
-          idCategoria.value = "@ViewBag.Categorias[3].idCategoria";
-					break;
-				case valor > m * 7 && valor <= m * 9:
-          //alert("Corona");
-					botonCorona.click();
-					break;
-				case valor > m * 9 && valor <= m * 11:
-					//alert("Geografia");
-          idCategoria.value = "@ViewBag.Categorias[4].idCategoria";
-					break;
-				case valor > m * 11 && valor <= m * 13:
-					//alert("Ciencias");
-          idCategoria.value = "@ViewBag.Categorias[1].idCategoria";
-					break;
-				default:
-					//alert("Historia");
-          idCategoria.value = "@ViewBag.Categorias[5].idCategoria";
-					break;
-			}
-      if (!(valor > m * 7 && valor <= m * 9)){
-        botonFormulario.click();
+      function calcular(valor) {
+        var m = 360 / 7 / 2;
+        //valor = m * 7 + 1;
+        ruleta.style.transform = "rotate(" + (0 - valor) + "deg)";
+        setTimeout(() => {
+          switch (true) {
+            case valor > 0 && valor <= m:
+              //alert("Historia");
+              idCategoria.value = "@ViewBag.Categorias[5].idCategoria";
+              break;
+            case valor > m && valor <= m * 3:
+              //alert("Deportes");
+              idCategoria.value = "@ViewBag.Categorias[2].idCategoria";
+              break;
+            case valor > m * 3 && valor <= m * 5:
+              //alert("Arte");
+              idCategoria.value = "@ViewBag.Categorias[0].idCategoria";
+              break;
+            case valor > m * 5 && valor <= m * 7:
+              //alert("Entretenimiento");
+              idCategoria.value = "@ViewBag.Categorias[3].idCategoria";
+              break;
+            case valor > m * 7 && valor <= m * 9:
+              //alert("Corona");
+              botonCorona.click();
+              break;
+            case valor > m * 9 && valor <= m * 11:
+              //alert("Geografia");
+              idCategoria.value = "@ViewBag.Categorias[4].idCategoria";
+              break;
+            case valor > m * 11 && valor <= m * 13:
+              //alert("Ciencias");
+              idCategoria.value = "@ViewBag.Categorias[1].idCategoria";
+              break;
+            default:
+              //alert("Historia");
+              idCategoria.value = "@ViewBag.Categorias[5].idCategoria";
+              break;
+          }
+          if (!(valor > m * 7 && valor <= m * 9)) {
+            setTimeout(() => {
+              botonFormulario.click();
+            }, 2000);
+          }
+
+        }, 2500);
       }
+    }
 
-		}, 2500);
-	}
-}
+    document.addEventListener("DOMContentLoaded", () => {
+      const ruleta = document.querySelector("#ruleta");
+      const btn_ruleta = document.querySelector("#boton");
+      const idCategoria = document.querySelector("#idCategoria");
+      const botonFormulario = document.querySelector("#botonFormulario");
+      const botonCorona = document.querySelector("#botonCorona");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const ruleta = document.querySelector("#ruleta");
-    const boton = document.querySelector("#boton");
-    const idCategoria = document.querySelector("#idCategoria");
-    const botonFormulario = document.querySelector("#botonFormulario");
-    const botonCorona = document.querySelector("#botonCorona");
-    boton.addEventListener("click", girar);
+      btn_ruleta.addEventListener("click", girar);
 
-
-    const botones = document.querySelectorAll(".btn-categoria");
-    botones.forEach(boton => {
-        boton.addEventListener("click", function() {
-            botones.forEach(b => b.classList.remove("active"));
-            boton.classList.add("active");
+      const botones = document.querySelectorAll(".btn-categoria");
+      botones.forEach(boton => {
+        boton.addEventListener("click", function () {
+          botones.forEach(b => b.classList.remove("active"));
+          boton.classList.add("active");
+          idCategoria.value = boton.id;
+          botonFormulario.click();
         });
+      });
     });
 
+  </script>
 
+  @functions {
+    public string ObtenerEstadoCategoria(Partida partida, int idCategoria, int jugador)
+    {
+      Progreso progreso = null;
 
-});
+      if (jugador == 1)
+      {
+        foreach (Progreso p in ViewBag.Progresos)
+        {
+          if (p.idProgreso == partida.idProgreso1)
+          {
+            progreso =
+      p;
+          }
+        }
+      }
+      else if (jugador == 2)
+      {
+        foreach (Progreso p in ViewBag.Progresos)
+        {
+          if (p.idProgreso == partida.idProgreso2)
+          {
+            progreso = p;
+          }
+        }
+      }
 
-</script>
+      switch (idCategoria)
+      {
+        case 1:
+          if (progreso.Arte) { return ""; }
+          break;
+        case 2:
+          if (progreso.Ciencia) { return ""; }
+          break;
+        case 3:
+          if (progreso.Deporte) { return ""; }
+          break;
+        case 4:
+          if (progreso.Entretenimiento) { return ""; }
+          break;
+        case 5:
+          if (progreso.Geografia) { return ""; }
+          break;
+        case 6:
+          if (progreso.Historia) { return ""; }
+          break;
+      }
+      return "b-n";
+    }
+  }

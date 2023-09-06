@@ -11,11 +11,19 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min) + min);
 }
 
-function contador(objeto, tiempo, intervalo) {
+function contador(objeto, tiempo, intervalo, opciones, enviar) {
 	window.setInterval(function () {
 		if (tiempo >= 0) {
 			objeto.textContent = tiempo + "''";
 			tiempo--;
+		}
+		if (tiempo == 0){
+			opciones.forEach(opcion => {
+				setTimeout(() => {
+					enviar.click();
+				}, 5000);
+				opcion.classList.add("incorrecta");
+			});
 		}
 	}, intervalo * 1000);
 }
@@ -82,7 +90,7 @@ function enviarOpcion() {
 
 function advanceCharBy(char, distance) {
 	oldCode = char.charCodeAt(0);
-	newCode = 65 + (oldCode - 65 + 26 + distance) % 26;
+	newCode = 65 + ((oldCode - 65 + 26 + distance) % 26);
 	const newChar = String.fromCharCode(newCode);
 	return newChar;
-};
+}

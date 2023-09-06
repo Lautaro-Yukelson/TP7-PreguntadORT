@@ -20,17 +20,22 @@ html {
 
 html {
   width: 100vw;
-  height: 100%;
+  height: 100vh;
 }
 
 body{
-  width: 100%;
-  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+a{
+  text-decoration: none;
+  color: #fff;
 }
 
 .pagina{
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 .main{
@@ -48,8 +53,16 @@ body{
   background-size: cover;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+}
+
+.ganaste{
+  justify-content: center;
+}
+
+#volverMenu:hover{
+  color: #fff;
 }
 
 .title-wrapper {
@@ -61,7 +74,6 @@ body{
 }
 
 .bottom-title {
-  order: 3;
   font-weight: 500;
   text-align: center;
   display: block;
@@ -73,7 +85,6 @@ body{
 
 .sweet-title {
   width:  830px;
-  order: 2;
   color: #fff;
   font-weight: 900;
   text-transform: uppercase;
@@ -139,12 +150,29 @@ body{
   border-radius: 5px;
 }
 
+.Esperando{
+  background-color:#868686;
+  
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-shadow: 0px 1px 0px #000;
+  filter: dropshadow(color=#000, offx=0px, offy=1px);
+  
+  -webkit-box-shadow:inset 0 1px 0 #a7a7a7, 0 10px 0 #4a4a4a;
+  -moz-box-shadow:inset 0 1px 0 #a7a7a7, 0 10px 0 #4a4a4a;
+  box-shadow:inset 0 1px 0 #a7a7a7, 0 10px 0 #4a4a4a;
+}
+
+.Esperando:active{
+  background-color:#868686;
+  -webkit-box-shadow:inset 0 1px 0 #a7a7a7, inset 0 -3px 0 #4a4a4a;
+  -moz-box-shadow:inset 0 1px 0 #a7a7a7, inset 0 -3pxpx 0 #4a4a4a;
+  box-shadow:inset 0 1px 0 #a7a7a7, inset 0 -3px 0 #4a4a4a;
+}
+
 /*****************************************************Modal Configurar Juego*****************************************************/
-.formulario-configuracion{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+.show{
+  display: block;
 }
 
 .botones-dificultades{
@@ -180,6 +208,13 @@ body{
   align-items: center;
   background-color: #39547d;
   border: none;
+  color: #fff;
+}
+
+.modal-footer p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-body{
@@ -474,4 +509,117 @@ body{
   100%{
     width: 100%;
   }
+}
+
+/*****************************************************LISTA PARTIDAS*****************************************************/
+
+.multi{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url("../images/fondo-form.jpg");
+  background-position: center;
+  background-size: contain;
+  height: 100vh;
+}
+
+.partidas-container{
+  position: relative;
+  width: 830px;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.partidas{
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 0px 8px 0px 8px;
+}
+
+.partida{
+  height: 100px;
+  width: 100%;
+  
+  margin-top: 15px;
+  padding: 4px 50px 4px 50px;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jugador1, .jugador2{
+  text-align: center;
+}
+
+.jugador1 p, .jugador2 p{
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.btnContinuar{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.crear{
+  margin-bottom: 15px;
+}
+
+.chico{
+  width: 100px;
+  font-size: 15px;
+  padding: 0;
+}
+
+.nav{
+  width: 100%;
+}
+
+.partidas::-webkit-scrollbar {
+  width: 10px;
+}
+
+.partidas::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-radius: 100px;
+}
+
+.partidas::-webkit-scrollbar-thumb {
+  background-color: #39547d;
+  border-radius: 100px;
+}
+
+.p{
+  text-align: center;
+}
+
+/************************************************Crear Partida*********************************************************/
+.header-crearPartida{
+  background: #d6d6d6;
+}
+
+.body-crearPartida{
+  height: fit-content;
+  background: #fff;
+}
+
+.body-crearPartida form{
+  width: 95%;
+}
+
+/***********************************Contraseña Incorrecta / Usuario no encontrado*********************************************/
+.swal2-container{
+  position: absolute !important;
 }

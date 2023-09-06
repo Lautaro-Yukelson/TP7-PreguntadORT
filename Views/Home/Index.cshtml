@@ -1,5 +1,12 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http;
+
+@{
     ViewData["Title"] = "Inicio";
+
+    int cookieInt;
+    string cookieString = Context.Request.Cookies["logStatus"];
+    bool conversionSuccess = int.TryParse(cookieString, out cookieInt);
+
 }
 
 <div class="pagina-presentacion">
@@ -7,122 +14,96 @@
         <h1 class="sweet-title">PREGUNTADOS</h1>
         <span class="bottom-title">Por Iair Steimberg y Lautaro Yukelson</span>
     </div>
+    <button type="button" class="jugar btnModal" data-bs-toggle="modal" data-bs-target="#loginModal" id="loginBtn">
+        Vamos! </button>
 
-    <button
-        type="button"
-        class="jugar"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-    >
-        Vamos!
-    </button>
-
-    <!-- Modal -->
-    <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-    >
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginBtn" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        Configurá tu juego...
-                    </h1>
-                    <button
-                        type="button"
-                        class="btn-close btn-close-white"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                    ></button>
+                    <h1 class="modal-title fs-5" id=""> Iniciar Sesion.. </h1>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+                        id="cerrado"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="/Home/Comenzar" class="formulario-configuracion">
-                        <input type="text" class="form-control inputNombre" name="username" placeholder="Tu nombre..." autocomplete="off" required hidden>
-                        <div class="inputs_arcade">
-                            <div class="cyclic_input" tabindex="0">A</div>
-                            <div class="cyclic_input" tabindex="0">A</div>
-                            <div class="cyclic_input" tabindex="0">A</div>
-                        </div>
-                        <div class="botones-dificultades">       
-                            <input id="dificultad" type="number" name="dificultad" required hidden>             
-                            <button type="button" id="1" class="btn-dificultad jugar">Facil</button>
-                            <button type="button" id="2" class="btn-dificultad jugar">Normal</button>
-                            <button type="button" id="3" class="btn-dificultad jugar">Dificil</button>
-                        </div>
-                        <button id="enviar" type="submit" hidden></button>
+                    <form method="post" action="/Home/IniciarSesion" class="formulario-configuracion">
+                        <input type="text" name="usuario" class="form-control" placeholder="Usuario" required>
+                        <input type="password" name="contrasena" class="form-control" placeholder="Contraseña" required>
+                        <button type="submit" class="jugar">Iniciar Sesion</button>
                     </form>
                 </div>
-                <div class="modal-footer">  
-                    <button type="button" class="jugar" id="enviar-falso">Ahora jugar!</button>
+                <div class="modal-footer">
+                    <p>¿No tienes una cuenta? <button type="button" class="jugar chico btnModal" data-bs-toggle="modal"
+                            data-bs-target="#registerModal" id="registerBtn"> Registrate </button></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerBtn" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="">
+                    Registrase..
+                </h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/Home/CrearCuenta" class="formulario-configuracion">
+                    <input type="text" name="usuario" class="form-control" placeholder="Usuario" required>
+                    <input type="password" name="contrasena" class="form-control" placeholder="Contraseña" required>
+                    <button type="submit" class="jugar">Crear Cuenta</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Ya tienes una cuenta? <button type="button" class="jugar chico btnModal" id="miniLoginBtn"> Inicia
+                        Sesion </button></p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const botones = document.querySelectorAll(".btn-dificultad");
-        const dificultad = document.querySelector("#dificultad");
-        const enviar = document.querySelector("#enviar");
-        const enviarFalso = document.querySelector("#enviar-falso");
-        const inputNombre = document.querySelector(".inputNombre");
+    document.addEventListener("DOMContentLoaded", function () {
+        const modals = document.getElementsByClassName("modal");
+        const loginBtn = document.getElementById("loginBtn");
+        const registerBtn = document.getElementById("registerBtn");
+        const miniLoginBtn = document.getElementById("miniLoginBtn");
 
-        botones.forEach(boton => {
-            boton.addEventListener("click", function() {
-                botones.forEach(b => b.classList.remove("active"));
-                boton.classList.add("active");
-                dificultad.value = boton.id;
-            });
+        if (@cookieInt == -1){
+            Swal.fire({
+                icon: 'error',
+                title: 'Contraeña incorrecta',
+                text: 'Vuelve a ingresar tu contraseña pero no le erres.',
+                footer: '<a href="https://chat.openai.com/" style="color:blue;">Olvidaste tu contraseña?</a>'
+            })
+        } else if (@cookieInt == -2){
+            console.log("Usuario no Encontrado");
+            Swal.fire(
+                'User not found',
+                'El usuario ingresado no fue ingresdo correctamente, fijate si lo escribiste malo cualquier cosa',
+                'question'
+            );
+        }
+
+        loginBtn.addEventListener("click", function () {
+            if (@cookieInt == 1) {
+                window.location.href = "./Home/Multijugador";
+            }
         });
 
-        enviarFalso.addEventListener("click", function() {
-            enviar.click();
+        registerBtn.addEventListener("click", function () {
+            loginBtn.click();
         });
 
-        ////////////////////////////////////////////////////////////////////
-        let nombre = ["A", "A", "A"];
-        let actual = 0;
-
-        KEYCODES = { left: 37, up: 38, right: 39, down: 40 };
-
-        $('.cyclic_input').on('keydown',function(ev){
-            input = $(this);
-            val = $(this).text();
-
-            switch (ev.keyCode) {   
-            case KEYCODES.right:
-                input.next().focus();
-                if (actual < 2){
-                    actual++;
-                }
-                break;
-            case KEYCODES.left:
-                input.prev().focus();
-                if (actual > 0){
-                    actual--;
-                }
-                break;
-            case KEYCODES.up:
-                input.text(advanceCharBy(val, 1));
-                nombre[actual] = advanceCharBy(val, 1);
-                break;
-            case KEYCODES.down:
-                input.text(advanceCharBy(val, -1));
-                nombre[actual] = advanceCharBy(val, -1);
-                break;
-            default:
-                if (ev.keyCode >= 65 && ev.keyCode <= 65 + 26) {
-                    input.text(String.fromCharCode(ev.keyCode));
-                    input.next().focus()
-                }
-            };
-            inputNombre.value = nombre.join('');
+        miniLoginBtn.addEventListener("click", function () {
+            registerBtn.click();
+            loginBtn.click();
         });
     });
 </script>
-
